@@ -14,8 +14,8 @@ class TestPrintBoardGame(TestCase):
             ["O", "O", "X"],
             ["_", "_", "O"]
         ]
-        expected_output = "\n-------------\n| X | X | X |\n-------------\n| O | O | X |\n-------------\n| _ | _ | O |\n-------------\n"
+        expectedOutput = "\n-------------\n| X | X | X |\n-------------\n| O | O | X |\n-------------\n| _ | _ | O |\n-------------\n"
 
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.play.printBoardGame(board)
-            self.assertEqual(mock_stdout.getvalue(), expected_output)
+            self.assertEqual(mock_stdout.getvalue(), expectedOutput)
