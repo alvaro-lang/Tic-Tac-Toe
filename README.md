@@ -1,5 +1,5 @@
 # Tic_Tac_Toe project
-Project made in python 3.11.6.
+Project made in python 3.
 
 Add to the project a virtualenv and install the dependencies of requirements.txt file. Also, add enviroment variables from .env.example file to your .env file
 

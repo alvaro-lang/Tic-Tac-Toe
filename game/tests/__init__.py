@@ -1,0 +1,3 @@
+from .TestPrintBoardGame import TestPrintBoardGame
+from .TestCheckBoardCompleted import TestCheckBoardCompleted
+from .TestCheckVictory import TestCheckVictory
