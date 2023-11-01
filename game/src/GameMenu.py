@@ -13,9 +13,8 @@ class GameMenu():
 
             print("1 - Jugar una partida.")
             print("2 - Ver partidas jugadas.")
-            print("3 - Iniciar sesión.")
-            print("4 - Registrarse.")
-            print("5 - Salir.")
+            print("3 - Ver puntuacion de los jugadores.")
+            print("4 - Salir.")
 
             selectedOption = int(input("\nSelecciona una opción: "))
 
@@ -26,8 +25,6 @@ class GameMenu():
             elif selectedOption == 3:
                 print()
             elif selectedOption == 4:
-                print()
-            elif selectedOption == 5:
                 break
             else:
                 print(f"\n{Fore.RED}SELECCIONA UN VALOR DE LAS OPCIONES INDICADAS.{Style.RESET_ALL}")
