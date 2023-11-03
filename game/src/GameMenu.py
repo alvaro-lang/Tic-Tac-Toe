@@ -1,12 +1,16 @@
 from .Play import Play
 from colorama import Fore, Style
+from .PlayerScore import PlayerScore
+from .utils.ClearConsole import ClearConsole
 
 class GameMenu():
 
     def menu(self):
-        play = Play()
 
         while True:
+            # Use ClearConsole to dont have repetitive logs in your console.
+            ClearConsole().clear()
+
             print("\n############################")
             print(f"# {Fore.YELLOW}BIENVENIDO A TIC-TAC-TOE{Style.RESET_ALL} #")
             print("############################\n")
@@ -17,13 +21,16 @@ class GameMenu():
             print("4 - Salir.")
 
             selectedOption = int(input("\nSelecciona una opción: "))
-
+            
+            # Use ClearConsole to dont have repetitive logs in your console.
+            ClearConsole().clear()
+            
             if selectedOption == 1:
-                play.playGame()
+                Play().playGame()
             elif selectedOption == 2:
                 print()
             elif selectedOption == 3:
-                print()
+                PlayerScore().showPlayersScore()
             elif selectedOption == 4:
                 break
             else:

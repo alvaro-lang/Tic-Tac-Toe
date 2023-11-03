@@ -1,7 +1,7 @@
 from django.test import TestCase
 from io import StringIO
 from unittest.mock import patch
-from ..src.Play import Play
+from ...src.Play import Play
 
 class TestPrintBoardGame(TestCase):
 
@@ -18,4 +18,4 @@ class TestPrintBoardGame(TestCase):
 
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.play.printBoardGame(board)
-            self.assertEqual(mock_stdout.getvalue(), expectedOutput)
+            self.assertEqual(expectedOutput, mock_stdout.getvalue())

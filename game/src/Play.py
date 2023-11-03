@@ -1,4 +1,7 @@
 from colorama import Fore, Style
+from .repository.PlayerRepository import PlayerRepository
+from .utils.ClearConsole import ClearConsole
+import re
 
 class Play():
     
@@ -43,6 +46,10 @@ class Play():
                 
         return True
 
+    def removeColorFormatting(self, text):
+        color_pattern = re.compile(r'\x1b\[[0-9;]+m')
+        return color_pattern.sub('', text)
+
     def playGame(self):
         board = [
             ["_", "_", "_"],
@@ -50,15 +57,18 @@ class Play():
             ["_", "_", "_"]
         ]
 
-        player1 = f"{Fore.LIGHTBLUE_EX}X{Style.RESET_ALL}"
-        player2 = f"{Fore.YELLOW}O{Style.RESET_ALL}"
-
+        player1 = {"name": f"{Fore.LIGHTBLUE_EX}Invitado1{Style.RESET_ALL}",
+                   "symbol": f"{Fore.LIGHTBLUE_EX}X{Style.RESET_ALL}"
+                   }
+        player2 = {"name": f"{Fore.YELLOW}Invitado2{Style.RESET_ALL}",
+                   "symbol": f"{Fore.YELLOW}O{Style.RESET_ALL}"
+                   } 
+        
         currentPlayer = player1
-
         while True:
-            print("\n########################")
-            print(f"| Turno del jugador {currentPlayer}. |")
-            print("########################")
+            print("\n##############################################")
+            print(f"| Turno del jugador {currentPlayer['name']} con simbolo {currentPlayer['symbol']}. |")
+            print("##############################################")
 
             self.printBoardGame(board)
 
@@ -66,14 +76,20 @@ class Play():
             row = int(input("Elige una fila (0, 1, 2): "))
             column = int(input("Elige una columna (0, 1, 2): "))
 
+            # Use ClearConsole to dont have repetitive logs in your console.
+            ClearConsole().clear()
             if (row >= 0 and row <=2) and (column >=0 and column <=2):
                 if board[row][column] == "_":
-                    board[row][column] = currentPlayer
+                    board[row][column] = currentPlayer['symbol']
                     
-                    if self.checkVictory(board, currentPlayer):
+                    if self.checkVictory(board, currentPlayer['symbol']):
+                        PlayerRepository().addVictory(self.removeColorFormatting(currentPlayer['symbol']))
+                        print(f"{Fore.GREEN}¡VICTORIA PARA EL JUGADOR {currentPlayer['name']} {Fore.GREEN}CON SIMBOLO{Style.RESET_ALL} {currentPlayer['symbol']}{Fore.GREEN}!{Style.RESET_ALL}")
                         break
-                    if self.checkBoardCompleted(board):
+
+                    elif self.checkBoardCompleted(board):
                         print(f"{Fore.GREEN}EMPATE. EL TABLERO HA SIDO TOTALMENTE COMPLETADO{Style.RESET_ALL}")
+                        break
 
                     # Change player turn
                     if currentPlayer == player1:
@@ -81,9 +97,9 @@ class Play():
                     else:
                         currentPlayer = player1
                 else:
-                    print(f"{Fore.RED}ERROR. CASILLA ACTUALMENTE OCUPADA.{Style.RESET_ALL}")
+                    print(f"{Fore.RED}ERROR. CASILLA ACTUALMENTE OCUPADA, VUELVE A ELEGIR UNA CASILLA.{Style.RESET_ALL}")
             else:
                 print(f"{Fore.RED}ERROR. LOS VALORES DEBEN ESTAR COMPRENDIDOS ENTRE 0 Y 2 COMO SE INDICA.{Style.RESET_ALL}")
 
         self.printBoardGame(board)
-        print(f"{Fore.GREEN}¡VICTORIA PARA EL JUGADOR {currentPlayer}!{Style.RESET_ALL}")
+        input("\nPulsa intro para volver al menú...")

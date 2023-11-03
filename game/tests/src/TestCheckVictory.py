@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..src.Play import Play
+from ...src.Play import Play
 
 class TestCheckVictory(TestCase):
 
