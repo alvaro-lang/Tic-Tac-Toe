@@ -74,24 +74,45 @@ class Play():
             self.printBoardGame(board)
 
             # Game inputs
-            row = int(input("Elige una fila (0, 1, 2): "))
-            column = int(input("Elige una columna (0, 1, 2): "))
-
+            row = input("Elige una fila (0, 1, 2): ")
+            if row.isdigit():
+                row = int(row)
+            else:
+                row = None
+            column = input("Elige una columna (0, 1, 2): ")
+            if column.isdigit():
+                column = int(column)
+            else:
+                column = None
+            
             # Use ClearConsole to dont have repetitive logs in your console.
             ClearConsole().clear()
-            if (row >= 0 and row <=2) and (column >=0 and column <=2):
+            if row != None and column != None and (row >= 0 and row <=2) and (column >=0 and column <=2):
                 if board[row][column] == "_":
                     board[row][column] = currentPlayer['symbol']
                     
+                    # Check if victory or if the board is completed. Then there is a draw.
                     if self.checkVictory(board, currentPlayer['symbol']):
-                        PlayerRepository().addVictory(self.removeColorFormatting(currentPlayer['symbol']))
                         print(f"{Fore.GREEN}¡VICTORIA PARA EL JUGADOR {currentPlayer['name']} {Fore.GREEN}CON SIMBOLO{Style.RESET_ALL} {currentPlayer['symbol']}{Fore.GREEN}!{Style.RESET_ALL}")
-                        GameRepository().insert(player1["name"], player2["name"], currentPlayer["name"], False, board)
+                        self.printBoardGame(board)
+
+                        PlayerRepository().addVictory(self.removeColorFormatting(currentPlayer['symbol']))
+                        for i in range(3):
+                            for j in range(3):
+                                board[i][j] = self.removeColorFormatting(board[i][j])
+                        GameRepository().insert(self.removeColorFormatting(player1["name"]), self.removeColorFormatting(player2["name"]), \
+                                                self.removeColorFormatting(currentPlayer["name"]), False, board)
+
                         break
 
                     elif self.checkBoardCompleted(board):
                         print(f"{Fore.GREEN}EMPATE. EL TABLERO HA SIDO TOTALMENTE COMPLETADO{Style.RESET_ALL}")
-                        GameRepository().insert(player1["name"], player2["name"], None, True, board)
+                        self.printBoardGame(board)
+                        for i in range(3):
+                            for j in range(3):
+                                board[i][j] = self.removeColorFormatting(board[i][j])
+                        GameRepository().insert(self.removeColorFormatting(player1["name"]), self.removeColorFormatting(player2["name"]), \
+                                                None, True, board)                        
                         break
 
                     # Change player turn
@@ -104,5 +125,4 @@ class Play():
             else:
                 print(f"{Fore.RED}ERROR. LOS VALORES DEBEN ESTAR COMPRENDIDOS ENTRE 0 Y 2 COMO SE INDICA.{Style.RESET_ALL}")
 
-        self.printBoardGame(board)
         input("\nPulsa intro para volver al menú...")

@@ -17,3 +17,6 @@ class GameRepository():
         game.save()
 
         return game
+
+    def getAllGames(self):
+        return Game.objects.all()
