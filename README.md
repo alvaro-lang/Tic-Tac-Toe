@@ -25,10 +25,6 @@ Install pip packages in virtualenv from a file requirements
 ```
 pip install -r "requirements.txt"
 ```
-Make migrations to sqlite database
-```
-python manage.py makemigrations
-```
 ```
 python manage.py migrate
 ```
