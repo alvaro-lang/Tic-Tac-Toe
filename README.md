@@ -33,3 +33,7 @@ Execute main.py
 ```
 python main.py
 ```
+Execute tests
+```
+python manage.py test
+```
