@@ -25,6 +25,7 @@ Install pip packages in virtualenv from a file requirements
 ```
 pip install -r "requirements.txt"
 ```
+Create database
 ```
 python manage.py migrate
 ```
