@@ -9,7 +9,6 @@ When you complete every step, execute the main.py file to start playing.
 
 ## Steps
 
-### Virtualenv
 Necessary package to create virtualenv
 ```
 pip install virtualenv
