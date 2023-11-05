@@ -6,10 +6,10 @@ class PlayerRepository():
         player = None
 
         if playerSymbol == "X":
-            player = Player.objects.get(name = "Invitado1")
+            player = self.getPlayerByName("Invitado1")
 
         elif playerSymbol == "O":
-            player = Player.objects.get(name = "Invitado2")
+            player = self.getPlayerByName("Invitado2")
 
         if player != None:
             player.gamesWon += 1
@@ -21,4 +21,7 @@ class PlayerRepository():
         return Player.objects.all()
     
     def getPlayerByName(self, playerName):
-        return Player.objects.get(name=playerName)
+        if (not playerName == None):
+            return Player.objects.get(name=playerName)
+        
+        return None

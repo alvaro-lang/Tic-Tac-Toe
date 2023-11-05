@@ -7,7 +7,7 @@ class Game(models.Model):
     player2 = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='player2')
     winner = models.ForeignKey('Player', on_delete=models.CASCADE, related_name='winner', null=True)
     draw = models.BooleanField(default=False)
-    board = models.CharField(max_length=150)
+    board = models.JSONField()
 
     class Meta:
         db_table = 'game'

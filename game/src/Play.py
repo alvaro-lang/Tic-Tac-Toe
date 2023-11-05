@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 from .repository.PlayerRepository import PlayerRepository
+from .repository.GameRepository import GameRepository
 from .utils.ClearConsole import ClearConsole
 import re
 
@@ -85,10 +86,12 @@ class Play():
                     if self.checkVictory(board, currentPlayer['symbol']):
                         PlayerRepository().addVictory(self.removeColorFormatting(currentPlayer['symbol']))
                         print(f"{Fore.GREEN}¡VICTORIA PARA EL JUGADOR {currentPlayer['name']} {Fore.GREEN}CON SIMBOLO{Style.RESET_ALL} {currentPlayer['symbol']}{Fore.GREEN}!{Style.RESET_ALL}")
+                        GameRepository().insert(player1["name"], player2["name"], currentPlayer["name"], False)
                         break
 
                     elif self.checkBoardCompleted(board):
                         print(f"{Fore.GREEN}EMPATE. EL TABLERO HA SIDO TOTALMENTE COMPLETADO{Style.RESET_ALL}")
+                        GameRepository().insert(player1["name"], player2["name"], None, True)
                         break
 
                     # Change player turn
