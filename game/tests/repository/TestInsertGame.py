@@ -6,6 +6,6 @@ class TestInsertGame(TestCase):
 
     def testInsert(self):
 
-        game = GameRepository().insert("Invitado1", "Invitado2", None, True)
+        game = GameRepository().insert("Invitado1", "Invitado2", None, True, None)
         
         self.assertEqual(1, game.id)

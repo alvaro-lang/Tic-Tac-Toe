@@ -86,12 +86,12 @@ class Play():
                     if self.checkVictory(board, currentPlayer['symbol']):
                         PlayerRepository().addVictory(self.removeColorFormatting(currentPlayer['symbol']))
                         print(f"{Fore.GREEN}¡VICTORIA PARA EL JUGADOR {currentPlayer['name']} {Fore.GREEN}CON SIMBOLO{Style.RESET_ALL} {currentPlayer['symbol']}{Fore.GREEN}!{Style.RESET_ALL}")
-                        GameRepository().insert(player1["name"], player2["name"], currentPlayer["name"], False)
+                        GameRepository().insert(player1["name"], player2["name"], currentPlayer["name"], False, board)
                         break
 
                     elif self.checkBoardCompleted(board):
                         print(f"{Fore.GREEN}EMPATE. EL TABLERO HA SIDO TOTALMENTE COMPLETADO{Style.RESET_ALL}")
-                        GameRepository().insert(player1["name"], player2["name"], None, True)
+                        GameRepository().insert(player1["name"], player2["name"], None, True, board)
                         break
 
                     # Change player turn
