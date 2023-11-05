@@ -2,8 +2,10 @@
 Project made in python 3.
 
 Add to the project a virtualenv and install the dependencies of requirements.txt file. Also, add enviroment variables from .env.example file to your .env file if is necessary.
+
 It's implemented a sqlite database, so dont care about the database, just "Run the server" and it will be created automatically.
-When you complete every steps, execute the main.py file to start playing.
+
+When you complete every step, execute the main.py file to start playing.
 
 ## Steps
 
