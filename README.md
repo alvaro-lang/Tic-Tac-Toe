@@ -26,14 +26,6 @@ Install pip packages in virtualenv from a file requirements
 ```
 pip install -r "requirements.txt"
 ```
-To create "requirements.txt" from your virtualenv
-```
-pip freeze > requirements.txt
-```
-Exit virtualenv
-```
-deactivate
-```
 
 Install pip packages in virtualenv from the file requirements.txt
 ```
